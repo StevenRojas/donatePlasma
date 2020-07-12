@@ -1,7 +1,8 @@
-FROM golang:alpine AS middleware
+FROM golang:alpine AS register
 
-ENV MIDDLEWARE_REST_PORT=8000
-
+RUN mkdir -p /code/certs
+COPY certs/donatuplasma.org.cer /code/certs/donatuplasma.org.cer
+COPY certs/donatuplasma.org.key /code/certs/donatuplasma.org.key
 # Working directory for build
 WORKDIR /build
 
@@ -9,6 +10,7 @@ WORKDIR /build
 COPY go.mod .
 #COPY go.sum .
 RUN go mod download
+RUN mkdir -p /frontend/static/images
 
 # Build the code to get the binary (register)
 COPY . .

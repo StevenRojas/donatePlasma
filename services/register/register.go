@@ -15,6 +15,7 @@ import (
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/rs/cors"
 )
 
 var logger log.Logger
@@ -35,8 +36,14 @@ func main() {
 
 	go func() {
 		level.Info(logger).Log("msg", "Listing on port "+httpPort)
-		handler := transport.NewHTTPServer(ctx, endpoints)
-		errs <- http.ListenAndServe(httpPort, handler)
+		router := transport.NewHTTPServer(ctx, endpoints)
+		handler := cors.New(cors.Options{
+			AllowedOrigins: []string{"*"},
+			AllowedMethods: []string{"GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"},
+			AllowedHeaders: []string{"Content-Type", "Accept", "Authorization", "token"},
+		}).Handler(router)
+		errs <- http.ListenAndServeTLS(":8000", "/code/certs/donatuplasma.org.cer",
+			"/code/certs/donatuplasma.org.key", handler)
 	}()
 
 	go func() {
@@ -49,7 +56,7 @@ func main() {
 }
 
 func connectToDb(conn string) *sql.DB {
-	level.Info(logger).Log("msg", "Connecting to DB")
+	level.Info(logger).Log("msg", "Connecting to DB", conn)
 	db, err := sql.Open("mysql", conn)
 	level.Info(logger).Log("msg", "DB response ", err)
 	if err != nil {
@@ -62,7 +69,7 @@ func connectToDb(conn string) *sql.DB {
 func getHTTPPort() string {
 	httpPort, ok := os.LookupEnv("HTTP_PORT")
 	if !ok {
-		httpPort = "8080"
+		httpPort = "8001"
 	}
 	return ":" + httpPort
 }
@@ -76,7 +83,7 @@ func getConnectionString() string {
 	if !ok {
 		password = "123"
 	}
-	host, ok := os.LookupEnv("MYSQL_HOST")
+	host, ok := os.LookupEnv("MYSQL_SERVER")
 	if !ok {
 		host = "localhost"
 	}
@@ -84,11 +91,11 @@ func getConnectionString() string {
 	if !ok {
 		port = "33016"
 	}
-	db, ok := os.LookupEnv("MYSQL_DB")
+	db, ok := os.LookupEnv("MYSQL_DATABASE")
 	if !ok {
 		db = "donate"
 	}
-	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", username, password, host, port, db)
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", username, password, host, port, db)
 }
 
 func setLogger() log.Logger {

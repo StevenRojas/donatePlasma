@@ -1,0 +1,100 @@
+<div class="container">
+  <kt-header-plasma></kt-header-plasma>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="m-5 p-5">
+        <div class="kt-register__form">
+          <kt-footer-plasma></kt-footer-plasma>
+          <kt-portlet [class]="'kt-portlet--height-fluid'" [ngStyle]="{'width': '100%'}">
+            <kt-portlet-body>
+              <div class="row">
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4 p-5">
+                  <div class="p-5">
+                    <a routerLink="/receptores" routerLinkActive="active">
+                      <div class="bg-light px-1 py-8 rounded-xl text-center p-5" [ngStyle]="{'height': '230px'}">
+                      <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
+                        <p class="text-black-50 font-weight-bold font-size-h6">Te necesitan</p>
+                        <a class="text-black-50 font-weight-bold font-size-h1"> Receptores </a>
+                        <br>
+                        <img src="./assets/media/plasma/icono-receptores.svg" width="84px" height="84px"
+                             [ngStyle]="{'margin-top': '1rem', 'margin-bottom': '2rem'}"/>
+                      </span>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <!-- <h1 class="text-info">1660</h1> -->
+                    </div>
+                    <div class="col-12 text-center">
+                      <!-- <h6 class="text-info">Esperan tu ayuda</h6> -->
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4 p-5">
+                  <div class="p-5">
+                    <a routerLink="/donadores" routerLinkActive="active">
+                      <div class="bg-light px-1 py-8 rounded-xl text-center p-5" [ngStyle]="{'height': '230px'}">
+                      <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
+                        <p class="text-black-50 font-weight-bold font-size-h6">Puedes ayudar?</p>
+                        <a class="text-black-50 font-weight-bold font-size-h1"> Donadores </a>
+                        <br>
+                        <img src="./assets/media/plasma/icono-dona.svg" width="84px" height="84px"
+                             [ngStyle]="{'margin-top': '1rem', 'margin-bottom': '2rem'}"/>
+                      </span>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <!-- <h1 class="text-info">121</h1> -->
+                    </div>
+                    <div class="col-12 text-center">
+                      <!-- <h6 class="text-info">Donantes</h6> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4 p-5">
+                  <div class="p-5">
+                    <a routerLink="/faq" routerLinkActive="active">
+                      <div class="bg-light px-1 py-8 rounded-xl text-center p-5" [ngStyle]="{'height': '230px'}">
+                      <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
+                        <p class="text-black-50 font-weight-bold font-size-h6">Tienes dudas?</p>
+                        <a class="text-black-50 font-weight-bold font-size-h1"> Informaci&oacute;n </a>
+                        <br>
+                        <img src="./assets/media/plasma/icono-faq.svg" width="84px" height="84px"
+                             [ngStyle]="{'margin-top': '1rem', 'margin-bottom': '2rem'}"/>
+                      </span>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <!-- <h1 class="text-info">1660</h1> -->
+                    </div>
+                    <div class="col-12 text-center">
+                      <!-- <h6 class="text-info">Esperan tu ayuda</h6> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div [ngStyle]="{'height': 'auto'}" class="mt-5 mb-5 pt-5 pb-5">
+                <div class="row align-middle h-100">
+                  <div class="col-12 text-center align-middle">
+
+                  </div>
+                  <div class="col-12 text-center align-middle">
+                    <h2>¿Conoces de alguien que puede donar? av&iacute;sale o reg&iacute;strale</h2>
+                    <h1 class="text-success ">COMPARTE!</h1>
+                  </div>
+                </div>
+              </div>
+            </kt-portlet-body>
+          </kt-portlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

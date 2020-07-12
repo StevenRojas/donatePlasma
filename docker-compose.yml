@@ -18,16 +18,45 @@ services:
     networks:
       - local-network
 
-  # register-dp:
-  #   build: ./services/register
-  #   container_name: register-dp
-  #   restart: always
-  #   depends_on:
-  #     - mysql-dp
-  #   ports: 
-  #     - "8800:8000" # REST
-  #   networks: 
-  #     - local-network
+  frontend:
+    build: ./frontend
+    container_name: frontend-dp
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - local-network
+
+  register-dp:
+    build: ./services/register
+    container_name: register-dp
+    restart: always
+    volumes: 
+      - type: bind
+        source: ./frontend/dist/assets/media/images
+        target: /frontend/static/images
+    depends_on:
+      - mysql-dp
+    ports: 
+      - "8000:8000" # REST
+    env_file:
+      - services/register/env_vars.env
+    networks: 
+      - local-network
+
+  matcher-dp:
+    build: ./services/matcher
+    container_name: matcher-dp
+    restart: always
+    depends_on:
+      - mysql-dp
+    ports: 
+      - "8001:8000" # REST
+    env_file:
+      - services/matcher/env_vars.env
+    networks: 
+      - local-network
 
 networks:
   local-network:

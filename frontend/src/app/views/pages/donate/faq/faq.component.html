@@ -1,0 +1,238 @@
+<div class="container">
+  <kt-header-plasma></kt-header-plasma>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="m-5 p-5">
+        <div class="kt-register__form">
+          <kt-footer-plasma></kt-footer-plasma>
+          <kt-portlet [class]="'kt-portlet--height-fluid'" [ngStyle]="{'width': '100%'}">
+            <kt-portlet-body>
+              <mat-tab-group>
+                <mat-tab label="Preguntas Frecuentes">
+                  <div class="row">
+                    <div class="col-12 text-justify">
+
+                      <div class="row">
+                        <div class="col-12">
+                          <b>P.- ¿Quiénes somos y qué hacemos?</b>
+                        </div>
+                        <div class="col-12">
+                          <p>Somos un grupo voluntario de ciudadanos con el propósito de crear una plataforma digital que
+                            aporte información sobre pacientes recuperados (donantes) y personas que necesitan donación de
+                            plasma para ayudar a combatir el COVID-19 (receptores).</p>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-12">
+                          <b>P.- ¿Cómo puedo registrarme como donante?</b>
+                        </div>
+                        <div class="col-12">
+                          <p>Para ser donante, debes considerar los siguientes puntos:</p>
+                          <p> <b>-</b> Puedes dar plasma si tienes entre 18 y 70 años, pesas más de 50 kilos y te encuentras bien de salud.</p>
+                          <p> <b>-</b> Una vez que has dado plasma, tienes que esperar un mínimo de 15 días para la próxima donación. Pero si has dado sangre, deberás esperar 2 meses.</p>
+                          <p> <b>-</b> En caso de ser mujer, no estar embarazada.</p>
+                          <p>Puedes registrarte como donante llenando el siguiente formulario: <a routerLink="/dona"
+                                                                                                  routerLinkActive="active">DONA</a>
+                          </p>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-12">
+                          <b>P.- ¿Qué plasma es compatible con el mío?</b>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                          <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                              <th scope="col">Tipo de plasma Paciente Receptor</th>
+                              <th scope="col">Tipo de plasma Compatibles de Donantes</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                              <td>A</td>
+                              <td>A, AB</td>
+                            </tr>
+                            <tr>
+                              <td>B</td>
+                              <td>B, AB</td>
+                            </tr>
+                            <tr>
+                              <td>AB</td>
+                              <td>AB</td>
+                            </tr>
+                            <tr>
+                              <td>O</td>
+                              <td>O, AB, A, B</td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="row">
+                          <div class="col-12">
+                            <p>Fuente: <a href="https://mytransfusion.com.au/about-blood/matching-blood-groups" target="_blank" class="alert-link">https://mytransfusion.com.au/about-blood/matching-blood-groups</a></p>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-12">
+                          <b>P.- Necesito plasma. ¿Cómo puedo obtener ayuda?</b>
+                        </div>
+                        <div class="col-12">
+                          <p>Puedes regtistrarte como receptor aquí: <a routerLink="/recibe" routerLinkActive="active">RECIBE</a>
+                          </p>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-12">
+                          <b>P.- ¿Cómo se utiliza mi información en esta plataforma y cómo se maneja mi privacidad?</b>
+                        </div>
+                        <div class="col-12">
+                          <p>Puedes registrarte dos modalidades: pública y privada.
+                          <p>Bajo la modalidad pública, compartiremos tus datos en esta plataforma y las personas podrán verla para contactarse contigo.</p>
+                          <p>Bajo la modalidad privada, mantendremos tu información en confidencialidad y
+                            si la plataforma encuentra una correlación entre un potencial donante y receptor, la Fundación Naira colaborará contactandose con ambas partes (donador y receptor).</p>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-12">
+                          <b>P.- No soy donante ni receptor. ¿Puedo participar como voluntario?</b>
+                        </div>
+                        <div class="col-12">
+                          <p>Si quieres colaborar de alguna forma a esta plataforma, ponte en contacto con nosotros: <a
+                              class="btn btn-outline-light" (click)="openCoolModal($event)">Quiero ser voluntario</a></p>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-12">
+                          <b>P.- Como puedo enviar mis sugerencias?</b>
+                        </div>
+                        <div class="col-12">
+                          <p>Puedes enviarnos tus sugerencias usando ese formulario: <a class="btn btn-outline-light"
+                                                                                        (click)="openSuggestModel($event)">Enviar Sugerencia</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+                <mat-tab label="Términos y condiciones">
+                  <div class="row">
+                    <div class="col-12 text-center">
+                    </div>
+                    <div class="col-12">
+                      <div class="text-justify">
+                        <p>donatuplasma.org es una plataforma sin fines de lucro que permite a personas que requieren plasma hiperinmune encontrar o ser encontrados por posibles donantes. El registro de donantes y receptores es completamente voluntario y la plataforma permite decidir si se quiere que la información de registro (nombre, número de contacto, ciudad, tipo de plasma y foto) sean públicos o no. Las personas que se registren tienen la opción de quitar sus datos de la plataforma.</p>
+
+                        <p>donatuplasma.org no hará uso alguno de los datos disponibles, se considera esos datos de dominio público, como los publicados en Redes Sociales como Facebook</p>
+
+                        <p>donatuplasma.org revisará de manera periódica las imágenes que se suben en el registro de receptores. Si bien no se responsabiliza por el contenido, se reserva el derecho de quitar la imagen si la considerara inapropiada.</p>
+
+                        <p>donatuplasma.org realizar&aacute; la destrucci&oacute;n de informaci&oacute;n que sea almacenada en nuestros servidores al finalizar esta pandemia</p>
+
+                        <p>donatuplasma.org no se reponsabiliza por el uso de la informaci&oacute;n que terceros puedan obtener de esta plataforma</p>
+
+                        <p>donatuplasma.org y Fundación Naira <b>NO</b> se hacen responsables de trámites, autorizaciones o costos en los que puedan incurrir donantes ni receptores antes, durante o después de realizar la donación de plasma</p>
+
+                        <p>Puedes registrarte en dos modalidades: pública y privada. Bajo la modalidad pública, compartiremos tus datos en esta plataforma y las personas podrán verla para contactarse contigo. Puedes quitar tus datos de la lista el momento que gustes.</p>
+
+                        <p>Bajo la modalidad privada, mantendremos tu información en confidencialidad y si la plataforma encuentra una correlación entre un potencial donante y receptor, la Fundación Naira colaborará en poner en contacto con ambas partes. Puedes quitar tus datos de la lista el momento que gustes.</p>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+
+
+            </kt-portlet-body>
+          </kt-portlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+    #coolModal
+    [swalOptions]="coolModalOption"
+>
+  <form *swalPortal [formGroup]="coolFormGroup" autocomplete="off" class="kt-register__form kt-form w-100 p-5"
+        [ngStyle]="{'margin': 'auto'}">
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 col-12 col-md-12 col-lg-12">
+        <div class="form-group">
+          <mat-form-field class="input-full-width w-100">
+            <mat-label>Email</mat-label>
+            <input formControlName="alias" matInput placeholder="Email" type="text"/>
+            <mat-error *ngIf="isControlHasErrorCool('alias','required')">
+              <strong>Este campo es requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="isControlHasErrorCool('alias','email')">
+              <strong>Por favor ingrese un email v&aacute;lido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 col-12 col-md-12 col-lg-12">
+        <div class="form-group">
+          <mat-form-field class="input-full-width w-100">
+            <mat-label>Comentario</mat-label>
+            <textarea formControlName="comment" matInput placeholder="Comentario" col="2" rows="10"></textarea>
+            <mat-error *ngIf="isControlHasErrorCool('comment','minLength')">
+              <strong>Debe ser tener al menos 10 letras</strong>
+            </mat-error>
+            <mat-error *ngIf="isControlHasErrorCool('comment','required')">
+              <strong>Este campo es requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</swal>
+
+
+<swal
+    #suggestModal
+    [swalOptions]="suggestModalOption"
+>
+  <form *swalPortal [formGroup]="suggestFormGroup" autocomplete="off" class="kt-register__form kt-form w-100 p-5"
+        [ngStyle]="{'margin': 'auto'}">
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 col-12 col-md-12 col-lg-12">
+        <div class="form-group">
+          <mat-form-field class="input-full-width w-100">
+            <mat-label>Nombre o email (opcional)</mat-label>
+            <input formControlName="alias" matInput placeholder="Nombre o email (opcional)" type="text"/>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 col-12 col-md-12 col-lg-12">
+        <div class="form-group">
+          <mat-form-field class="input-full-width w-100">
+            <mat-label>Comentario</mat-label>
+            <textarea formControlName="comment" matInput placeholder="Comentario" col="2" rows="10"></textarea>
+            <mat-error *ngIf="isControlHasErrorSuggest('comment','minLength')">
+              <strong>Debe ser tener al menos 10 letras</strong>
+            </mat-error>
+            <mat-error *ngIf="isControlHasErrorSuggest('comment','required')">
+              <strong>Este campo es requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</swal>

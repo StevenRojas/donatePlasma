@@ -1,0 +1,117 @@
+<div class="container">
+  <kt-header-plasma></kt-header-plasma>
+  <div class="row">
+    <div class="col-12">
+      <div class="m-5 p-5">
+        <div class="kt-register__form">
+          <kt-footer-plasma></kt-footer-plasma>
+          <kt-portlet [class]="'kt-portlet--height-fluid'" [ngStyle]="{'width': '100%'}">
+            <kt-portlet-body>
+              <form [formGroup]="formGroup" autocomplete="off" class="kt-register__form kt-form w-100"
+                    [ngStyle]="{'margin': 'auto'}">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="row">
+                      <div class="col-12 text-left">
+                        <h4>Buscar donadores por:</h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="form-group">
+                          <mat-form-field class="input-full-width w-100">
+                            <mat-label>Nombre o celular</mat-label>
+                            <input #query (keyup)="setQuery(query.value)" formControlName="query" matInput
+                                   placeholder="Nombre o celular" type="text"/>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 text-right">
+                      <a routerLink="/dona" routerLinkActive="active" class="btn btn-success">Donar</a>
+                  </div>
+                </div>
+              </form>
+              <ng-container *ngIf="total == 0">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <p>No se encontraron donadores</p>
+                  </div>
+                </div>
+              </ng-container>
+              <div class="row">
+                <div class="col-12" *ngFor="let item of list | async">
+                  <div class="item-border">
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="row">
+                          <div class="col-6 col-sm-4 text-center">
+                            <div class="row">
+                              <div class="col-12">
+                                <a (click)="deleteReceptor(item.id)" class="btn btn-light mt-2 w-100">
+                                  Qu&iacute;tame de la lista</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-6 col-sm-4">
+                            <div class="row">
+                              <div class="col-12">
+                                <h3>{{ item.name }}</h3>
+                              </div>
+                              <div class="col-12">
+                                <!--                                <p>{{ item.phone }} <span *ngIf="item.phone && item.cell">-</span> <span *ngIf="item.cell"> {{ item.cell }}</span> </p>-->
+                                <p>{{ item.cell }} </p>
+                              </div>
+                              <div class="col-12">
+                                <p> {{ item.email }}</p>
+                              </div>
+                              <div class="col-12">
+                                <ng-container *ngIf="item.city_id">
+                                  <ng-container *ngFor="let city of cities">
+                                    <b *ngIf="item.city_id == city.value"> {{ city.display }} </b>
+                                  </ng-container>
+                                </ng-container>
+                                <ng-container *ngIf="!item.city_id">
+                                  <b>Bolivia</b>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-4 mt-5 pt-5 mt-sm-0 pt-sm-0 text-left">
+                            <div class="blood-image-container mt-5 pt-5 mt-sm-0 pt-sm-0 ">
+                              <img class="blood-image"
+                                   src="./assets/media/plasma/icono-sangre-{{ item.blood_type_id }}.svg"
+                                   width="84px" height="84px"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-12">
+                  <mat-paginator
+                      [length]="total"
+                      [pageSize]="30"
+                      (page)="updatePagination($event)"
+                  >
+                  </mat-paginator>
+                </div> -->
+              </div>
+            </kt-portlet-body>
+          </kt-portlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+    #failModal
+    [swalOptions]="failModalOption"
+>
+  <div *swalPortal>
+    <p>Esta seguro que desea retirar a este donador?</p>
+  </div>
+</swal>

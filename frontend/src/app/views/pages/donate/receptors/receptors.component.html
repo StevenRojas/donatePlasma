@@ -1,0 +1,202 @@
+<div class="container">
+  <kt-header-plasma></kt-header-plasma>
+  <div class="row">
+    <div class="col-12">
+      <div class="m-5 p-5">
+        <div class="kt-register__form">
+          <kt-footer-plasma></kt-footer-plasma>
+          <kt-portlet [class]="'kt-portlet--height-fluid'" [ngStyle]="{'width': '100%'}">
+            <kt-portlet-body>
+              <form [formGroup]="formGroup" autocomplete="off" class="kt-register__form kt-form w-100"
+                    [ngStyle]="{'margin': 'auto'}">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="row">
+                      <div class="col-12 text-left">
+                        <h4>Buscar receptores por:</h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="form-group">
+                          <mat-form-field class="input-full-width w-100">
+                            <mat-select (selectionChange)="setCity($event)" placeholder="Tu ciudad"
+                                        aria-label="Tu ciudad"
+                                        formControlName="city">
+                              <mat-option value="0">Bolivia</mat-option>
+                              <mat-option *ngFor="let enumObj of cities"
+                                          value="{{ enumObj.value }}">{{ enumObj.display }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group">
+                          <mat-form-field class="input-full-width w-100">
+                            <mat-select (selectionChange)="setBloodType($event)" placeholder="Plasma compatible con"
+                                        aria-label="Plasma compatible con"
+                                        formControlName="blood_type">
+                              <mat-option value="0">Todos</mat-option>
+                              <mat-option *ngFor="let enumObj of bloodTypes"
+                                          value="{{ enumObj.value }}">{{ enumObj.display }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group">
+                          <mat-form-field class="input-full-width w-100">
+                            <mat-label>Nombre o celular</mat-label>
+                            <input #query (keyup)="setQuery(query.value)" formControlName="query" matInput
+                                   placeholder="Nombre o celular" type="text"/>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 text-right">
+                    <a routerLink="/recibe" routerLinkActive="active" class="btn btn-success">Recibe plasma</a>
+                </div>
+                </div>
+              </form>
+              <ng-container *ngIf="total == 0">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <p>No se encontraron receptores</p>
+                  </div>
+                </div>
+              </ng-container>
+              <div class="row">
+                <div class="col-12" *ngFor="let item of list | async">
+                  <div class="item-border">
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="row">
+                          <div class="col-6 col-sm-4 text-center">
+                            <div class="row">
+                              <div class="col-12">
+                                <img class="w-100" [src]="item.photo" alt="" appImage>
+                              </div>
+                              <div class="col-12">
+                                <a (click)="deleteReceptor(item.id)" class="btn btn-light mt-2 w-100">
+                                  Qu&iacute;tame de la lista</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-6 col-sm-4">
+                            <div class="row">
+                              <div class="col-12">
+                                <h3>{{ item.name }}</h3>
+                              </div>
+                              <div class="col-12">
+                                <!--                                <p>{{ item.phone }} <span *ngIf="item.phone && item.cell">-</span> <span *ngIf="item.cell"> {{ item.cell }}</span> </p>-->
+                                <p>{{ item.cell_phones }} </p>
+                              </div>
+                              <div class="col-12">
+                                <p> {{ item.email }}</p>
+                              </div>
+                              <div class="col-12">
+                                <ng-container *ngIf="item.city_id">
+                                  <ng-container *ngFor="let city of cities">
+                                    <b *ngIf="item.city_id == city.value"> {{ city.display }} </b>
+                                  </ng-container>
+                                </ng-container>
+                                <ng-container *ngIf="!item.city_id">
+                                  <b>Bolivia</b>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-4 mt-5 pt-5 mt-sm-0 pt-sm-0 text-left">
+                            <div class="blood-image-container mt-5 pt-5 mt-sm-0 pt-sm-0 ">
+                              <img class="blood-image"
+                                   src="./assets/media/plasma/icono-sangre-{{ item.blood_type_id }}.svg"
+                                   width="84px" height="84px"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6 text-right">
+                        <div class="row">
+                          <!--                                                    <div class="col-12">-->
+                          <!--                                                        <a routerLink="/dona" routerLinkActive="active" class="alert-link" href="#">Puedes donar? ayuda!</a>-->
+                          <!--                                                    </div>-->
+                          <div class="col-12">
+                            <div class="w-100 h-100"></div>
+                          </div>
+                          <div class="col-12 pr-5">
+                            Podr&iacute;a recibir plasma de: <br>
+                            <div class="row justify-content-end">
+                              <div *ngFor="let compatible of item.potential_donors" class="col-1 cursor-pointer"
+                                   (click)="showDonors(compatible.blood_type_id)">
+                                <img class="p-1"
+                                     src="./assets/media/plasma/icono-sangre-{{ compatible.blood_type_id }}.svg"
+                                     width="34px" [ngStyle]="{'position': 'relative', 'right': '8px'}"/>
+                                <p>{{ compatible.count}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <mat-paginator
+                      [length]="total"
+                      [pageSize]="30"
+                      (page)="updatePagination($event)"
+                  >
+                  </mat-paginator>
+                </div>
+              </div>
+            </kt-portlet-body>
+          </kt-portlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+    #coolModal
+    [swalOptions]="coolModalOption"
+>
+  <div *swalPortal>
+    <h1><img class="p-1"
+             src="./assets/media/plasma/icono-sangre-{{ bloodTypeSelected }}.svg"
+             width="34px"/></h1>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Telefono</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngIf="donors.length > 0">
+        <tr *ngFor="let donor of donors">
+          <td>{{ donor.name }}</td>
+          <td>{{ donor.cell }}</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="donors.length === 0">
+        <tr>
+          <td colspan="2">
+            <div class="w-100 text-center"> Sin resultados para este tipo de sangre</div>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</swal>
+
+<swal
+    #failModal
+    [swalOptions]="failModalOption"
+>
+  <div *swalPortal>
+    <p>Esta seguro que desea retirar a este receptor?</p>
+  </div>
+</swal>
