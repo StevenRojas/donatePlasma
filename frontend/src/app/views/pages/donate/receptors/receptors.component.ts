@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {MatSelectChange} from '@angular/material/select';
 import {map} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SweetAlertOptions} from 'sweetalert2';
+import Swal, {SweetAlertOptions} from 'sweetalert2';
 import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 import {DonorService} from '../../../../core/donate/services/donor.service';
 import {Meta, Title} from "@angular/platform-browser";
@@ -106,7 +106,13 @@ export class ReceptorsComponent implements OnInit {
       if (result.value) {
         this.recipientService.delete(receptorId).subscribe(
           (response) => {
-            this.getAll();
+            Swal.fire({
+              title: 'Gracias por su ayuda',
+              type: 'success',
+              timer: 3000
+            }).then(() => {
+              window.location.reload();
+            });
           }
         );
       }

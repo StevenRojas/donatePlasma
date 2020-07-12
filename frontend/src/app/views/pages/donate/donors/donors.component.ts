@@ -1,24 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RecipientService} from '../../../../core/donate/services/recipient.service';
-import {RecipientModel} from '../../../../core/donate/models/recipient.model';
 import {bloodTypes, cities} from '../../../../../environments/environment';
-import {Observable} from 'rxjs';
-import {MatSelectChange} from '@angular/material/select';
-import {map} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SweetAlertOptions} from 'sweetalert2';
+import Swal, {SweetAlertOptions} from 'sweetalert2';
 import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 import {DonorService} from '../../../../core/donate/services/donor.service';
-import { DonorModel } from 'src/app/core/donate/models/donor.model';
 import {Meta, Title} from "@angular/platform-browser";
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {DonorModel} from "../../../../core/donate/models/donor.model";
 
 @Component({
   selector: 'kt-donors',
   templateUrl: './donors.component.html',
   styleUrls: ['./donors.component.scss']
 })
-export class DonorsComponent implements OnInit {
+export class DonorsComponent implements OnInit, OnChanges {
 
   @ViewChild('coolModal', {static: false}) private coolModal: SwalComponent;
   public coolModalOption: SweetAlertOptions;
@@ -53,7 +51,6 @@ export class DonorsComponent implements OnInit {
     private meta: Meta
   ) {
     this.initRegisterFormGroup();
-    this.initRegisterFormGroup();
     this.title.setTitle('Dona tu Plasma - Lista de Donantes');
     this.meta.updateTag({ name: 'charset', content: 'UTF-8' });
     this.meta.updateTag({ name: 'description', content: '¿Necesitas recibir plasma? Aquí encontrarás información sobre posibles donantes de plasma para combatir el COVID-19.' });
@@ -87,12 +84,21 @@ export class DonorsComponent implements OnInit {
     this.getAll();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+  }
+
   public deleteReceptor(receptorId: number) {
     this.failModal.fire().then((result) => {
       if (result.value) {
         this.donorService.delete(receptorId).subscribe(
           (response) => {
-            this.getAll();
+            Swal.fire({
+              title: 'Gracias por su ayuda',
+              type: 'success',
+              timer: 3000
+            }).then(() => {
+              window.location.reload();
+            });
           }
         );
       }

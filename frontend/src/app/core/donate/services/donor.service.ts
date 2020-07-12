@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-import {map, retry} from 'rxjs/operators';
+import {map, retry, timeout} from 'rxjs/operators';
 import {DonorModel} from '../models/donor.model';
 
 @Injectable({
@@ -34,11 +34,7 @@ export class DonorService {
     if (bloodType && bloodType !== 0) {
       params = params.set('compatible_with', bloodType.toString());
     }
-    return this.http.get(environment.api_url + `donor/public`, {params})
-      .pipe(
-        retry(2),
-        map((response: any) => response)
-      );
+    return this.http.get<any>(environment.api_url + `donor/public`, {params});
   }
 
 

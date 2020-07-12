@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import Swal, {SweetAlertOptions} from "sweetalert2";
-import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import Swal, {SweetAlertOptions} from 'sweetalert2';
+import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { FaqService } from 'src/app/core/donate/services/faq.service';
-import {Meta, Title} from "@angular/platform-browser";
+import {Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'kt-faq',
@@ -51,7 +51,7 @@ export class FaqComponent implements OnInit {
     };
 
     this.suggestModalOption = {
-      title: 'Ayudanos a Mejorar!',
+      title: 'Mándanos tus sugerencias',
       type: 'success',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
@@ -75,8 +75,6 @@ export class FaqComponent implements OnInit {
           'Nos pondremos en contacto contigo',
           'success'
         )
-        // emit remove elemnt after delete
-        // this.updateListRequest(this.vehicleSelected);
       }
     });
   }
@@ -106,7 +104,7 @@ export class FaqComponent implements OnInit {
     );
     this.suggestFormGroup = this.fb.group(
         {
-          alias: ['Anónimo', Validators.compose([])],
+          alias: ['', Validators.compose([])],
           comment: ['', Validators.compose([Validators.required, Validators.minLength(10)])]
         }
     );
@@ -123,7 +121,7 @@ export class FaqComponent implements OnInit {
       return false;
     }
     const postObj = this.coolFormGroup.getRawValue();
-    const response = this.faqService.recruit(postObj['alias'], postObj['comment']);
+    const response = this.faqService.recruit(postObj.alias, postObj.comment);
     return new Promise((resolve, reject) => {
       response.subscribe(
         // tslint:disable-next-line:no-shadowed-variable
@@ -145,7 +143,7 @@ export class FaqComponent implements OnInit {
       return false;
     }
     const postObj = this.suggestFormGroup.getRawValue();
-    const response = this.faqService.comments(postObj['alias'], postObj['comment']);
+    const response = this.faqService.comments(postObj.alias, postObj.comment);
     return new Promise((resolve, reject) => {
       response.subscribe(
         // tslint:disable-next-line:no-shadowed-variable

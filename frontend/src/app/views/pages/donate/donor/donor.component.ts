@@ -124,6 +124,17 @@ export class DonorComponent implements OnInit {
     }
     this.loading = true;
     const postObj = this.formGroup.getRawValue();
+    Object.keys(postObj).forEach(controlName => {
+      if (['blood_type_id', 'city_id'].indexOf(controlName) !== -1) {
+        if(postObj[controlName] === '') {
+          delete postObj[controlName];
+        } else {
+          postObj[controlName] = parseInt(postObj[controlName], 10);
+        }
+      } else {
+        postObj[controlName] = postObj[controlName];
+      }
+    });
     this.donorService.post(postObj).subscribe(
         (donor: DonorModel) => {
           this.coolModal.fire().then((result) => {
@@ -139,7 +150,7 @@ export class DonorComponent implements OnInit {
             // @ts-ignore
             queryParams.city = postObj.city_id
           }
-          this.router.navigate(['/receptores'], {queryParams});
+          this.router.navigate(['/donadores'], {queryParams});
         },
         error => {
           this.failModal.fire().then((result) => {

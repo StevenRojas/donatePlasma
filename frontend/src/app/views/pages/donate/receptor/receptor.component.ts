@@ -7,6 +7,7 @@ import {RecipientService} from '../../../../core/donate/services/recipient.servi
 import {RecipientModel} from '../../../../core/donate/models/recipient.model';
 import {MatSelectChange} from '@angular/material/select';
 import {Meta, Title} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'kt-receptor',
@@ -34,6 +35,7 @@ export class ReceptorComponent implements OnInit {
   @ViewChild('tcModal', {static: false}) private tcModal: SwalComponent;
   public tcModalOption: SweetAlertOptions;
   constructor(
+      private router: Router,
       private fb: FormBuilder,
       private recipientService: RecipientService,
       private title: Title,
@@ -113,6 +115,17 @@ export class ReceptorComponent implements OnInit {
     this.loading = true;
     const postObj = this.formGroup.getRawValue();
     postObj.photo_path = this.lastFileAdd;
+    Object.keys(postObj).forEach(controlName => {
+      if (['blood_type_id', 'city_id'].indexOf(controlName) !== -1) {
+        if(postObj[controlName] === '') {
+          delete postObj[controlName];
+        } else {
+          postObj[controlName] = parseInt(postObj[controlName], 10);
+        }
+      } else {
+        postObj[controlName] = postObj[controlName];
+      }
+    });
     this.recipientService.post(postObj).subscribe(
         (donor: RecipientModel) => {
           this.coolModal.fire().then((result) => {
@@ -121,6 +134,9 @@ export class ReceptorComponent implements OnInit {
           });
           this.loading = false;
           this.formGroup.reset();
+          setTimeout(() => {
+            this.router.navigate(['/receptores']);
+          }, 1000);
         },
         error => {
           this.failModal.fire().then((result) => {
