@@ -202,6 +202,12 @@ func DecodeUploaderRequest(ctx context.Context, r *http.Request) (interface{}, e
 	}
 	ext := strings.Trim(filepath.Ext(handler.Filename), ".")
 	tempFile, err := ioutil.TempFile("../../frontend/static/images", "img-*."+ext)
+	tempFile.Chmod(0755)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+	err = tempFile.Chmod(0755)
 	if err != nil {
 		fmt.Println(err)
 		return nil, err
