@@ -38,7 +38,8 @@ func (repo *repository) GetRecipientList(ctx context.Context, cityID *int64, blo
 	sql = `SELECT id, blood_type_id, name, cell_numbers, email, photo_path, city_id, verified, public, created_at, updated_at, deleted_at,
 			(SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT(
 				'blood_type_id', donor_blood_type_id,
-				'count', (SELECT COUNT(id) FROM donor WHERE blood_type_id = donor_blood_type_id AND public = 1 AND verified = 1 AND deleted_at))),
+				'count', (SELECT COUNT(id) FROM donor WHERE blood_type_id = donor_blood_type_id
+				AND public = 1 AND verified = 1 AND deleted_at IS NULL))),
 				']') AS donors FROM compatibility WHERE recipient_blood_type_id = blood_type_id) AS donors
 			FROM recipient WHERE public = 1 AND verified = 1 AND deleted_at IS NULL`
 	if cityID != nil {
@@ -79,7 +80,7 @@ func (repo *repository) GetRecipientList(ctx context.Context, cityID *int64, blo
 // CanReceiveFrom returns donor counts for a recipient
 func (repo *repository) CanReceiveFrom(ctx context.Context, bloodTypeID int64) ([]CompatibleBloodCount, error) {
 	sql := `SELECT donor_blood_type_id, (SELECT count(id) FROM donor WHERE blood_type_id = donor_blood_type_id 
-		AND public = 1 AND verified = 1 AND deleted_at) as c 
+		AND public = 1 AND verified = 1 AND deleted_at IS NULL) as c 
 		FROM compatibility WHERE recipient_blood_type_id = ` + strconv.FormatInt(bloodTypeID, 10)
 	rows, err := repo.db.QueryContext(ctx, sql)
 	if err != nil {
@@ -100,7 +101,7 @@ func (repo *repository) CanReceiveFrom(ctx context.Context, bloodTypeID int64) (
 // CanDonateTo returns recipient counts for a donor
 func (repo *repository) CanDonateTo(ctx context.Context, bloodTypeID int64) ([]CompatibleBloodCount, error) {
 	sql := `SELECT recipient_blood_type_id, (SELECT count(id) FROM recipient WHERE blood_type_id = recipient_blood_type_id 
-		AND public = 1 AND verified = 1 AND deleted_at) as c 
+		AND public = 1 AND verified = 1 AND deleted_at IS NULL) as c 
 		FROM compatibility WHERE donor_blood_type_id= ` + strconv.FormatInt(bloodTypeID, 10)
 	rows, err := repo.db.QueryContext(ctx, sql)
 	if err != nil {
