@@ -55,7 +55,7 @@
                     </div>
                   </div>
                   <div class="col-4 text-right">
-                    <a routerLink="/recibe" routerLinkActive="active" class="btn btn-success">Recibe plasma</a>
+                    <a routerLink="/recibe" routerLinkActive="active" class="btn btn-success">Reg&iacute;strate para recibir plasma</a>
                 </div>
                 </div>
               </form>
@@ -72,10 +72,10 @@
                     <div class="row">
                       <div class="col-12 col-sm-6">
                         <div class="row">
-                          <div class="col-6 col-sm-4 text-center">
+                          <div class="col-12 col-sm-12 col-md-6 text-center">
                             <div class="row">
                               <div class="col-12">
-                                <img class="w-100" [src]="item.photo_path" alt="" appImage>
+                                <img class="w-100 image-list" [src]="item.photo_path" alt="" appImage (click)="showImage(item.photo_path)">
                               </div>
                               <div class="col-12">
                                 <a (click)="deleteReceptor(item.id)" class="btn btn-light mt-2 w-100">
@@ -83,7 +83,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-6 col-sm-4">
+                          <div class="col-12 col-sm-12 col-md-6">
                             <div class="row">
                               <div class="col-12">
                                 <h3>{{ item.name }}</h3>
@@ -107,7 +107,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 col-sm-4 mt-5 pt-5 mt-sm-0 pt-sm-0 text-left">
+                          <div class="col-12 col-sm-12 col-md-12 mt-5 pt-5 mt-sm-0 pt-sm-0 text-left">
                             <div class="blood-image-container mt-5 pt-5 mt-sm-0 pt-sm-0 ">
                               <img class="blood-image"
                                    src="./assets/media/plasma/icono-sangre-{{ item.blood_type_id }}.svg"
@@ -121,18 +121,21 @@
                           <!--                                                    <div class="col-12">-->
                           <!--                                                        <a routerLink="/dona" routerLinkActive="active" class="alert-link" href="#">Puedes donar? ayuda!</a>-->
                           <!--                                                    </div>-->
-                          <div class="col-12">
-                            <div class="w-100 h-100"></div>
-                          </div>
+<!--                          <div class="col-12">-->
+<!--                            <div class="w-100 h-100"></div>-->
+<!--                          </div>-->
                           <div class="col-12 pr-5">
                             Podr&iacute;a recibir plasma de: <br>
                             <div class="row justify-content-end">
-                              <div *ngFor="let compatible of item.potential_donors" class="col-1 cursor-pointer"
+                              <div *ngFor="let compatible of item.potential_donors" class="col cursor-pointer"
                                    (click)="showDonors(compatible.blood_type_id)">
-                                <img class="p-1"
-                                     src="./assets/media/plasma/icono-sangre-{{ compatible.blood_type_id }}.svg"
-                                     width="34px" [ngStyle]="{'position': 'relative', 'right': '8px'}"/>
-                                <p>{{ compatible.count}}</p>
+                                <div class="text-center">
+                                  <img class="p-1"
+                                       src="./assets/media/plasma/icono-sangre-{{ compatible.blood_type_id }}.svg"
+                                       width="34px" [ngStyle]="{'position': 'relative'}"/>
+                                </div>
+
+                                <div class="text-center">{{ compatible.count}}</div>
                               </div>
                             </div>
                           </div>

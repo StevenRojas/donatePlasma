@@ -174,4 +174,17 @@ export class ReceptorsComponent implements OnInit {
     this.page = pagination.pageIndex + 1;
     this.getAll();
   }
+
+  showImage(photoPath: string) {
+    if (photoPath || photoPath !== '') {
+      Swal.fire({
+        imageUrl: `https://donatuplasma.org/assets/media/images/${photoPath}`,
+      })
+    } else {
+      Swal.fire({
+        text: 'No hay imágen',
+      })
+    }
+
+  }
 }
