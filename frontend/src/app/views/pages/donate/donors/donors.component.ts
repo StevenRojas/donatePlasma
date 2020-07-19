@@ -25,6 +25,7 @@ export class DonorsComponent implements OnInit, OnChanges {
   public failModalOption: SweetAlertOptions;
 
   public formGroup: FormGroup;
+  public removeFormGroup: FormGroup;
   public list: Observable<DonorModel[]>;
   public bloodTypes = bloodTypes;
   public cities = cities;
@@ -90,8 +91,11 @@ export class DonorsComponent implements OnInit, OnChanges {
   public deleteReceptor(receptorId: number) {
     this.failModal.fire().then((result) => {
       if (result.value) {
-        this.donorService.delete(receptorId).subscribe(
+        const answer = this.removeFormGroup.controls.answer.value?true:false;
+        this.donorService.delete(
+          receptorId, answer, this.removeFormGroup.controls.comment.value).subscribe(
           (response) => {
+            this.removeFormGroup.reset();
             Swal.fire({
               title: 'Gracias por su ayuda',
               type: 'success',
@@ -99,7 +103,8 @@ export class DonorsComponent implements OnInit, OnChanges {
             }).then(() => {
               window.location.reload();
             });
-          }
+          },
+          (error) => this.removeFormGroup.reset()
         );
       }
     });
@@ -112,7 +117,12 @@ export class DonorsComponent implements OnInit, OnChanges {
         query: ['', Validators.compose([])]
       }
     );
+    this.removeFormGroup = this.fb.group({
+      answer: ['', Validators.compose([])],
+      comment: ['', Validators.compose([])],
+    });
   }
+
   setQuery(text) {
     this.query = text;
     this.getAll();

@@ -32,6 +32,12 @@ export class DonorComponent implements OnInit {
   public disabledAcceptTandC = true;
   public receptors: any[];
   public bloodTypeSelected: number;
+  public quantityDonations = [
+    { value: 'De 1 a 3 veces', display: 'De 1 a 3 veces'},
+    { value: 'De 3 a 6 veces', display: 'De 3 a 6 veces'},
+    { value: 'Mas de 6 veces', display: 'Más de 6 veces'},
+    { value: 'No lo se', display: 'No lo sé'},
+  ];
 
   constructor(
     private router: Router,
@@ -91,6 +97,7 @@ export class DonorComponent implements OnInit {
         email: ['', Validators.compose([Validators.email])],
         city_id: ['', Validators.compose([])],
         public: [true, Validators.compose([])],
+        quantity_donations: ['', Validators.compose([Validators.required])],
         tandc: ['', Validators.compose([Validators.required, Validators.requiredTrue])]
       }
     );

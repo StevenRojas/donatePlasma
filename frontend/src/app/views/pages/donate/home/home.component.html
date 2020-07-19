@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="m-5 p-5">
+      <div class="m-0 p-0 ml-sm-5 mr-sm-5 pl-sm-5 pr-sm-5">
         <div class="kt-register__form">
           <kt-footer-plasma></kt-footer-plasma>
           <kt-portlet [class]="'kt-portlet--height-fluid'" [ngStyle]="{'width': '100%'}">
@@ -14,7 +14,7 @@
                     <a routerLink="/receptores" routerLinkActive="active">
                       <div class="bg-light px-1 py-8 rounded-xl text-center p-5" [ngStyle]="{'height': '230px'}">
                       <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
-                        <p class="text-black-50 font-weight-bold font-size-h6">Te necesitan</p>
+                        <p class="text-black-50 font-weight-bold font-size-h6">¡Te necesitan!</p>
                         <a class="text-black-50 font-weight-bold font-size-h1"> Receptores </a>
                         <br>
                         <img src="./assets/media/plasma/icono-receptores.svg" width="84px" height="84px"
@@ -38,7 +38,7 @@
                     <a routerLink="/donadores" routerLinkActive="active">
                       <div class="bg-light px-1 py-8 rounded-xl text-center p-5" [ngStyle]="{'height': '230px'}">
                       <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
-                        <p class="text-black-50 font-weight-bold font-size-h6">Puedes ayudar?</p>
+                        <p class="text-black-50 font-weight-bold font-size-h6">¿Puedes ayudar?</p>
                         <a class="text-black-50 font-weight-bold font-size-h1"> Donadores </a>
                         <br>
                         <img src="./assets/media/plasma/icono-dona.svg" width="84px" height="84px"
@@ -61,7 +61,7 @@
                     <a routerLink="/faq" routerLinkActive="active">
                       <div class="bg-light px-1 py-8 rounded-xl text-center p-5" [ngStyle]="{'height': '230px'}">
                       <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
-                        <p class="text-black-50 font-weight-bold font-size-h6">Tienes dudas?</p>
+                        <p class="text-black-50 font-weight-bold font-size-h6">¿Tienes dudas?</p>
                         <a class="text-black-50 font-weight-bold font-size-h1"> Informaci&oacute;n </a>
                         <br>
                         <img src="./assets/media/plasma/icono-faq.svg" width="84px" height="84px"
@@ -80,7 +80,7 @@
                   </div>
                 </div>
               </div>
-              <div [ngStyle]="{'height': 'auto'}" class="mt-5 mb-5 pt-5 pb-5">
+              <div [ngStyle]="{'height': 'auto'}" class="mb-5 pb-5">
                 <div class="row align-middle h-100">
                   <div class="col-12 text-center align-middle">
 
@@ -88,6 +88,21 @@
                   <div class="col-12 text-center align-middle">
                     <h2>¿Conoces de alguien que puede donar? av&iacute;sale o reg&iacute;strale</h2>
                     <h1 class="text-success ">COMPARTE!</h1>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <div class="d-inline-block">
+                      <share-buttons [theme]="'default'"
+                                     [include]="['facebook', 'whatsapp', 'twitter', 'sms', 'print', 'copy']"
+                                     [show]="4"
+                                     [size]="-4"
+                                     [url]="'http://donatuplasma.org'"
+                                     [image]="'https://donatuplasma.org/assets/media/images/og-imagen-home.jpg'"
+                                     [tags]="'#DonaPlasmaSalvaVidas #RegalaEsperanza #JuntosSaldremosDeEsta'"
+                                     [autoSetMeta]="false"
+                      ></share-buttons>
+                    </div>
                   </div>
                 </div>
               </div>

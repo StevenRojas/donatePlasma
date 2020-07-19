@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="m-5 p-5">
+      <div class="m-0 p-0 ml-sm-5 mr-sm-5 pl-sm-5 pr-sm-5">
         <div class="kt-register__form">
           <kt-footer-plasma></kt-footer-plasma>
           <kt-portlet [class]="'kt-portlet--height-fluid'" [ngStyle]="{'width': '100%'}">
@@ -78,6 +78,23 @@
                             </mat-error>
                             <mat-error *ngIf="isControlHasError('email','email')">
                               <strong>Por favor ingrese un email v&aacute;lido</strong>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12 col-xs-12 col-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                          <mat-form-field class="input-full-width w-100">
+                            <mat-select placeholder="¿Cuántas veces crees que podrás donar?"
+                                        aria-label="¿Cuántas veces crees que podrás donar?" formControlName="quantity_donations">
+                              <mat-option *ngFor="let enumObj of quantityDonations"
+                                          value="{{ enumObj.value }}">{{ enumObj.display }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="isControlHasError('quantity_donations','required')">
+                              <strong>Este campo es requerido</strong>
                             </mat-error>
                           </mat-form-field>
                         </div>

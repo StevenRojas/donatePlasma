@@ -2,7 +2,7 @@
   <kt-header-plasma></kt-header-plasma>
   <div class="row">
     <div class="col-12">
-      <div class="m-5 p-5">
+      <div class="m-0 p-0 ml-sm-5 mr-sm-5 pl-sm-5 pr-sm-5">
         <div class="kt-register__form">
           <kt-footer-plasma></kt-footer-plasma>
           <kt-portlet [class]="'kt-portlet--height-fluid'" [ngStyle]="{'width': '100%'}">
@@ -199,7 +199,28 @@
     #failModal
     [swalOptions]="failModalOption"
 >
-  <div *swalPortal>
-    <p>Esta seguro que desea retirar a este receptor?</p>
+  
+<form *swalPortal [formGroup]="removeFormGroup" autocomplete="off" class="kt-register__form kt-form w-100 p-5"
+[ngStyle]="{'margin': 'auto'}">
+  <p>Esta seguro que desea retirar a este receptor?</p>
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 col-12 col-md-12 col-lg-12 text-left">
+      <div class="form-group">
+        <mat-checkbox formControlName='answer' >¿Pudiste recibir alguna donaci&oacute;n?</mat-checkbox>
+      </div>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 col-12 col-md-12 col-lg-12">
+      <div class="form-group">
+        <mat-form-field class="input-full-width w-100">
+          <mat-label>¿Quieres dejarnos algun comentario?</mat-label>
+          <textarea formControlName='comment' matInput placeholder="¿Quieres dejarnos algun comentario?" col="2" rows="10"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>  
+  
 </swal>

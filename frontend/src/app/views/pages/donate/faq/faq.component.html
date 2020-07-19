@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="m-5 p-5">
+      <div class="m-0 p-0 ml-sm-5 mr-sm-5 pl-sm-5 pr-sm-5">
         <div class="kt-register__form">
           <kt-footer-plasma></kt-footer-plasma>
           <kt-portlet [class]="'kt-portlet--height-fluid'" [ngStyle]="{'width': '100%'}">
@@ -26,13 +26,21 @@
                       <br>
                       <div class="row">
                         <div class="col-12">
+                          <b>P.- ¿Qué necesito para ser donante?</b>
+                        </div>
+                        <div class="col-12">
+                          <p>Para ser donante de plasma, como para dar sangre, hay que tener entre 18 y 70 años, pesar más de 50 kilos y encontrarse bien de salud. Las excepciones para dar plasma son casi las mismas que las de la sangre. Hay pero algunas pequeñas diferencias que debes tener en cuenta:</p>
+                          <p>- La donación de plasma es un poco mas larga, dura entre 45 minutos y una hora. ¿Por qué? Porque hay una máquina para separar los diferentes componentes de la sangre</p>
+                          <p>- Se puede dar plasma cada 15 días y hasta 24 veces al año. ¿Por qué? Porque la recuperación del plasma es muy rápida. En pocos días, el cuerpo ha vuelto a fabricar las proteínas y las sales minerales extraídas</p>
+                          <p>- Tras dar plasma, sólo tienes que esperar 15 días para volver a dar plasma o para donar sangre</p>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-12">
                           <b>P.- ¿Cómo puedo registrarme como donante?</b>
                         </div>
                         <div class="col-12">
-                          <p>Para ser donante, debes considerar los siguientes puntos:</p>
-                          <p> <b>-</b> Puedes dar plasma si tienes entre 18 y 70 años, pesas más de 50 kilos y te encuentras bien de salud.</p>
-                          <p> <b>-</b> Una vez que has dado plasma, tienes que esperar un mínimo de 15 días para la próxima donación. Pero si has dado sangre, deberás esperar 2 meses.</p>
-                          <p> <b>-</b> En caso de ser mujer, no estar embarazada.</p>
                           <p>Puedes registrarte como donante llenando el siguiente formulario: <a routerLink="/dona"
                                                                                                   routerLinkActive="active">DONA</a>
                           </p>
@@ -43,7 +51,7 @@
                         <div class="col-12">
                           <b>P.- ¿Qué plasma es compatible con el mío?</b>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="col-12 col-sm-10 col-md-8 col-lg-7">
                           <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -68,13 +76,30 @@
                               <td>O</td>
                               <td>O, AB, A, B</td>
                             </tr>
+                            <tr>
+                              <td>O-</td>
+                              <td>O-</td>
+                            </tr>
+                            <tr>
+                              <td>A-</td>
+                              <td>A-</td>
+                            </tr>
+                            <tr>
+                              <td>B-</td>
+                              <td>B-</td>
+                            </tr>
+                            <tr>
+                              <td>AB-</td>
+                              <td>AB-</td>
+                            </tr>
                             </tbody>
                           </table>
                         </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <p>Fuente: <a href="https://mytransfusion.com.au/about-blood/matching-blood-groups" target="_blank" class="alert-link">https://mytransfusion.com.au/about-blood/matching-blood-groups</a></p>
-                          </div>
+                        
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <p>Fuente: <a href="https://mytransfusion.com.au/about-blood/matching-blood-groups" target="_blank" class="alert-link">https://mytransfusion.com.au/about-blood/matching-blood-groups</a></p>
                         </div>
                       </div>
                       <br>
