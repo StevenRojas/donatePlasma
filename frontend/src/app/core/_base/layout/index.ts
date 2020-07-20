@@ -26,6 +26,7 @@ export { GetObjectPipe } from './pipes/get-object.pipe';
 export { JoinPipe } from './pipes/join.pipe';
 export { SafePipe } from './pipes/safe.pipe';
 export { TimeElapsedPipe } from './pipes/time-elapsed.pipe';
+export {MomentPipe} from './pipes/moment.pipe';
 
 // Services
 export { DataTableService } from './services/datatable.service';

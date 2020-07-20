@@ -33,10 +33,11 @@ export class DonorComponent implements OnInit {
   public receptors: any[];
   public bloodTypeSelected: number;
   public quantityDonations = [
-    { value: 'De 1 a 3 veces', display: 'De 1 a 3 veces'},
-    { value: 'De 3 a 6 veces', display: 'De 3 a 6 veces'},
-    { value: 'Mas de 6 veces', display: 'Más de 6 veces'},
-    { value: 'No lo se', display: 'No lo sé'},
+    { value: '1', display: 'Una sola vez'},
+    { value: '1-3', display: 'De 1 a 3 veces'},
+    { value: '3-6', display: 'De 3 a 6 veces'},
+    { value: '6+', display: 'Más de 6 veces'},
+    { value: 'no', display: 'No lo sé'}
   ];
 
   constructor(

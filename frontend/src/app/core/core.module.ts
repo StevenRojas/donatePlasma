@@ -9,7 +9,7 @@ import {
   GetObjectPipe,
   HeaderDirective,
   JoinPipe,
-  MenuDirective,
+  MenuDirective, MomentPipe,
   OffcanvasDirective,
   SafePipe,
   ScrollTopDirective,
@@ -39,6 +39,7 @@ import {
     GetObjectPipe,
     SafePipe,
     FirstLetterPipe,
+    MomentPipe
   ],
   exports: [
     // directives
@@ -57,6 +58,7 @@ import {
     GetObjectPipe,
     SafePipe,
     FirstLetterPipe,
+    MomentPipe,
   ],
   providers: []
 })

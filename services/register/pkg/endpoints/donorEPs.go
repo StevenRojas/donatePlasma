@@ -114,7 +114,7 @@ func makeDeleteDonorEndpoint(s service.Service) endpoint.Endpoint {
 			return nil, errors.New("Wrong request message")
 		}
 
-		err := s.DeleteDonor(ctx, req.ID)
+		err := s.DeleteDonor(ctx, req.ID, &req.Answer, &req.Comment)
 		ok = (err == nil)
 		return reqres.OkErrorResponse{
 			Ok:  ok,

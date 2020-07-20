@@ -53,7 +53,7 @@ func setDonorPaths(r *mux.Router, endpoints endpoints.Endpoints) {
 	))
 
 	// Delete a donor
-	r.Methods(http.MethodDelete).Path("/api/register/donor/{id}").Handler(httptransport.NewServer(
+	r.Methods(http.MethodPatch).Path("/api/register/donor/{id}/delete").Handler(httptransport.NewServer(
 		endpoints.DeleteDonor,
 		reqres.DecodeDeleteDonorRequest,
 		reqres.EncodeResponse,

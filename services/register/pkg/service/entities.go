@@ -11,6 +11,8 @@ type Recipient struct {
 	CityID      NullInt64  `json:"city_id"`
 	Public      bool       `json:"public"`
 	Verified    bool       `json:"verified"`
+	Answer      bool       `json:"answer,omitempty"`
+	Comment     string     `json:"comment,omitempty"`
 	CreatedAt   NullTime   `json:"created_at"`
 	UpdatedAt   NullTime   `json:"updated_at"`
 	DeletedAt   NullTime   `json:"deleted_at"`
@@ -26,6 +28,9 @@ type Donor struct {
 	CityID      NullInt64  `json:"city_id"`
 	Public      bool       `json:"public"`
 	Verified    bool       `json:"verified"`
+	Donations   int        `json:"quantity_donations"`
+	Answer      bool       `json:"answer,omitempty"`
+	Comment     string     `json:"comment,omitempty"`
 	CreatedAt   NullTime   `json:"created_at"`
 	UpdatedAt   NullTime   `json:"updated_at"`
 	DeletedAt   NullTime   `json:"deleted_at"`

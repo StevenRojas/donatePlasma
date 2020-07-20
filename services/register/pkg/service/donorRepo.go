@@ -25,9 +25,11 @@ func (repo *repository) GetDonorList(ctx context.Context, publicOnly bool, q str
 	start := (page - 1) * perPage
 	var sql string
 	if publicOnly {
-		sql = `SELECT * FROM donor WHERE public = 1 and verified = 1 and deleted_at IS NULL`
+		sql = `SELECT id, blood_type_id, name, cell, email, city_id, verified, public, created_at, updated_at, deleted_at
+		 FROM donor WHERE public = 1 and verified = 1 and deleted_at IS NULL`
 	} else {
-		sql = `SELECT * FROM donor`
+		sql = `SELECT id, blood_type_id, name, cell, email, city_id, verified, public, created_at, updated_at, deleted_at
+		 FROM donor`
 	}
 	if q != "" {
 		sql = sql + " AND (name LIKE '%" + q + "%' OR cell LIKE '" + q + "%')"
@@ -92,11 +94,11 @@ func (repo *repository) PublicDonor(ctx context.Context, donorID int64, public b
 }
 
 // DeleteDonor set delete a donor
-func (repo *repository) DeleteDonor(ctx context.Context, donorID int64) error {
+func (repo *repository) DeleteDonor(ctx context.Context, donorID int64, answer *bool, comment *string) error {
 	sql := `
-	UPDATE donor SET deleted_at = ? WHERE id = ?;`
+	UPDATE donor SET deleted_at = ?, answer = ?, comment = ? WHERE id = ?;`
 	stmt, err := repo.db.Prepare(sql)
-	_, err = stmt.ExecContext(ctx, time.Now(), donorID)
+	_, err = stmt.ExecContext(ctx, time.Now(), answer, comment, donorID)
 	if err != nil {
 		return err
 	}

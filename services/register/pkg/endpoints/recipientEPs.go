@@ -101,8 +101,7 @@ func makeDeleteRecipientEndpoint(s service.Service) endpoint.Endpoint {
 		if !ok {
 			return nil, errors.New("Wrong request message")
 		}
-
-		err := s.DeleteRecipient(ctx, req.ID)
+		err := s.DeleteRecipient(ctx, req.ID, &req.Answer, &req.Comment)
 		ok = (err == nil)
 		return reqres.OkErrorResponse{
 			Ok:  ok,

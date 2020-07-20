@@ -55,7 +55,9 @@ type PublicDonorResquest struct {
 
 // DeleteDonorResquest delete donor request
 type DeleteDonorResquest struct {
-	ID int64 `json:"id,omitempty"`
+	ID      int64  `json:"id,omitempty"`
+	Answer  bool   `json:"answer"`
+	Comment string `json:"comment"`
 }
 
 // ActivateDonorResquest activate donor request
@@ -63,7 +65,7 @@ type ActivateDonorResquest struct {
 	ID int64 `json:"id,omitempty"`
 }
 
-// GetRecipientsRequest recipient list request
+// GetDonorsRequest recipient list request
 type GetDonorsRequest struct {
 	Query   string
 	Page    int64
@@ -149,6 +151,8 @@ func DecodeDeleteDonorRequest(ctx context.Context, r *http.Request) (interface{}
 		return nil, errors.New("Invalid access")
 	}
 	var req DeleteDonorResquest
+	defer r.Body.Close()
+	err := json.NewDecoder(r.Body).Decode(&req)
 	vars := mux.Vars(r)
 	id, err := strconv.ParseInt(vars["id"], 10, 32)
 	if err != nil {

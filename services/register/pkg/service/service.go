@@ -15,7 +15,7 @@ type Service interface {
 	UpdateRecipient(ctx context.Context, recipient Recipient) (Recipient, error)
 	VerifyRecipient(ctx context.Context, recipientID int64, verified bool) error
 	PublicRecipient(ctx context.Context, recipientID int64, public bool) error
-	DeleteRecipient(ctx context.Context, recipientID int64) error
+	DeleteRecipient(ctx context.Context, recipientID int64, answer *bool, comment *string) error
 	ActivateRecipient(ctx context.Context, recipientID int64) error
 	SendComment(ctx context.Context, email string, comment string, isRecluter bool) error
 
@@ -24,7 +24,7 @@ type Service interface {
 	UpdateDonor(ctx context.Context, donor Donor) (Donor, error)
 	VerifyDonor(ctx context.Context, donorID int64, verified bool) error
 	PublicDonor(ctx context.Context, donorID int64, public bool) error
-	DeleteDonor(ctx context.Context, donorID int64) error
+	DeleteDonor(ctx context.Context, donorID int64, answer *bool, comment *string) error
 	ActivateDonor(ctx context.Context, donorID int64) error
 }
 
@@ -81,11 +81,11 @@ func (s service) PublicRecipient(ctx context.Context, recipientID int64, public 
 	return err
 }
 
-func (s service) DeleteRecipient(ctx context.Context, recipientID int64) error {
+func (s service) DeleteRecipient(ctx context.Context, recipientID int64, answer *bool, comment *string) error {
 	logger := log.With(s.logger, "msg", "DeleteRecipient")
 
 	logger.Log("msg", "Deleting Recipient")
-	err := s.repository.DeleteRecipient(ctx, recipientID)
+	err := s.repository.DeleteRecipient(ctx, recipientID, answer, comment)
 	return err
 }
 
@@ -137,11 +137,11 @@ func (s service) PublicDonor(ctx context.Context, donorID int64, public bool) er
 	return err
 }
 
-func (s service) DeleteDonor(ctx context.Context, donorID int64) error {
+func (s service) DeleteDonor(ctx context.Context, donorID int64, answer *bool, comment *string) error {
 	logger := log.With(s.logger, "msg", "DeleteDonor")
 
 	logger.Log("msg", "Deleting Donor")
-	err := s.repository.DeleteDonor(ctx, donorID)
+	err := s.repository.DeleteDonor(ctx, donorID, answer, comment)
 	return err
 }
 
