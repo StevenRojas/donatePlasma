@@ -147,7 +147,7 @@
                   </div>
                 </div>
                 <div class="col-12">
-                  <mat-paginator
+                  <mat-paginator #listPaginator
                       [length]="total"
                       [pageSize]="30"
                       (page)="updatePagination($event)"
