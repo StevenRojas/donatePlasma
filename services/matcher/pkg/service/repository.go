@@ -41,7 +41,8 @@ func (repo *repository) GetRecipientList(ctx context.Context, cityID *int64, blo
 				'count', (SELECT COUNT(id) FROM donor WHERE blood_type_id = donor_blood_type_id
 				AND public = 1 AND verified = 1 AND deleted_at IS NULL))),
 				']') AS donors FROM compatibility WHERE recipient_blood_type_id = blood_type_id) AS donors
-			FROM recipient WHERE public = 1 AND verified = 1 AND deleted_at IS NULL`
+			FROM recipient WHERE public = 1 AND verified = 1 AND deleted_at IS NULL 
+			AND created_at >= curdate() - INTERVAL DAYOFWEEK(curdate())+10 DAY`
 	if cityID != nil {
 		sql = sql + " AND city_id = " + strconv.FormatInt(*cityID, 10)
 	}
@@ -101,7 +102,7 @@ func (repo *repository) CanReceiveFrom(ctx context.Context, bloodTypeID int64) (
 // CanDonateTo returns recipient counts for a donor
 func (repo *repository) CanDonateTo(ctx context.Context, bloodTypeID int64) ([]CompatibleBloodCount, error) {
 	sql := `SELECT recipient_blood_type_id, (SELECT count(id) FROM recipient WHERE blood_type_id = recipient_blood_type_id 
-		AND public = 1 AND verified = 1 AND deleted_at IS NULL) as c 
+		AND public = 1 AND verified = 1 AND deleted_at IS NULL AND created_at >= curdate() - INTERVAL DAYOFWEEK(curdate())+10 DAY) as c 
 		FROM compatibility WHERE donor_blood_type_id= ` + strconv.FormatInt(bloodTypeID, 10)
 	rows, err := repo.db.QueryContext(ctx, sql)
 	if err != nil {
@@ -144,7 +145,8 @@ func (repo *repository) GetDonorList(ctx context.Context, bloodTypeID int64) ([]
 // getTotalRecipients get a count of verified and public recipients
 func (repo *repository) getTotalRecipients(ctx context.Context, cityID *int64, bloodTypeID *int64, q string) (int64, error) {
 	var sql string
-	sql = `SELECT count(id) as c FROM recipient WHERE public = 1 AND verified = 1 AND deleted_at IS NULL`
+	sql = `SELECT count(id) as c FROM recipient WHERE public = 1 AND verified = 1 AND deleted_at IS NULL
+		AND created_at >= curdate() - INTERVAL DAYOFWEEK(curdate())+10 DAY`
 	if cityID != nil {
 		sql = sql + " AND city_id = " + strconv.FormatInt(*cityID, 10)
 	}

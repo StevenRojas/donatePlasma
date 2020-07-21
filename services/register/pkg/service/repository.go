@@ -14,7 +14,7 @@ type Repository interface {
 	UpdateRecipient(ctx context.Context, recipient Recipient) (Recipient, error)
 	VerifyRecipient(ctx context.Context, recipientID int64, verified bool) error
 	PublicRecipient(ctx context.Context, recipientID int64, public bool) error
-	DeleteRecipient(ctx context.Context, recipientID int64) error
+	DeleteRecipient(ctx context.Context, recipientID int64, answer *bool, comment *string) error
 	ActivateRecipient(ctx context.Context, recipientID int64) error
 
 	CreateDonor(ctx context.Context, donor Donor) (int64, error)
@@ -22,7 +22,7 @@ type Repository interface {
 	UpdateDonor(ctx context.Context, donor Donor) (Donor, error)
 	VerifyDonor(ctx context.Context, donorID int64, verified bool) error
 	PublicDonor(ctx context.Context, donorID int64, public bool) error
-	DeleteDonor(ctx context.Context, donorID int64) error
+	DeleteDonor(ctx context.Context, donorID int64, answer *bool, comment *string) error
 	ActivateDonor(ctx context.Context, donorID int64) error
 }
 

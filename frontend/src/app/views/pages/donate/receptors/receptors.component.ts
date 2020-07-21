@@ -11,6 +11,7 @@ import Swal, {SweetAlertOptions} from 'sweetalert2';
 import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 import {DonorService} from '../../../../core/donate/services/donor.service';
 import {Meta, Title} from "@angular/platform-browser";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'kt-receptors',
@@ -23,6 +24,7 @@ export class ReceptorsComponent implements OnInit {
 
   @ViewChild('failModal', {static: false}) private failModal: SwalComponent;
   public failModalOption: SweetAlertOptions;
+  @ViewChild('listPaginator', {static: false}) public  listPaginator: MatPaginator;
 
   public formGroup: FormGroup;
   public removeFormGroup: FormGroup;
@@ -72,7 +74,6 @@ export class ReceptorsComponent implements OnInit {
       showCloseButton: true,
       showConfirmButton: false
     };
-
     this.failModalOption = {
       title: 'Eliminar Receptor',
       type: 'warning',
@@ -97,6 +98,7 @@ export class ReceptorsComponent implements OnInit {
             city: this.city
           });
         }
+
         this.getAll();
       });
     });
@@ -105,7 +107,7 @@ export class ReceptorsComponent implements OnInit {
   public deleteReceptor(receptorId: number) {
     this.failModal.fire().then((result) => {
       if (result.value) {
-        const answer = this.removeFormGroup.controls.answer.value?true:false;
+        const answer = !!this.removeFormGroup.controls.answer.value;
         this.recipientService.delete(
           receptorId, answer, this.removeFormGroup.controls.comment.value).subscribe(
           (response) => {

@@ -93,7 +93,7 @@ export class RecipientService {
   }
 
   public delete(recipientId: number, answer: boolean, comment: string): Observable<any> {
-    return this.http.patch<any>(environment.api_url + `recipient/${recipientId}`,{
+    return this.http.patch<any>(environment.api_url + `recipient/${recipientId}/delete`,{
       answer,
       comment
     })

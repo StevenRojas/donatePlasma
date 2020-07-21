@@ -101,6 +101,8 @@ import {FilePondModule, registerPlugin} from 'ngx-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import {MatPaginatorIntl} from "@angular/material/paginator";
+import {getSpanishPaginatorIntl} from "./core/_base/layout/spanish-paginator-initl";
 registerPlugin(FilePondPluginFileValidateType);
 registerPlugin(FilePondPluginFileValidateSize);
 registerPlugin(FilePondPluginImageExifOrientation);
@@ -166,6 +168,9 @@ registerPlugin(FilePondPluginImageExifOrientation);
       useValue: {
         languages: getHighlightLanguages
       }
+    },
+    {
+      provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl()
     },
     // template services
     SubheaderService,

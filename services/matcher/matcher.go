@@ -39,7 +39,7 @@ func main() {
 		router := transport.NewHTTPServer(ctx, endpoints)
 		handler := cors.New(cors.Options{
 			AllowedOrigins: []string{"*"},
-			AllowedMethods: []string{"GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"},
+			AllowedMethods: []string{"GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 			AllowedHeaders: []string{"Content-Type", "Accept", "Authorization", "token"},
 		}).Handler(router)
 		errs <- http.ListenAndServeTLS(":8000", "/code/certs/donatuplasma.org.cer",

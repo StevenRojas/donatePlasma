@@ -10,6 +10,7 @@ import {Meta, Title} from "@angular/platform-browser";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {DonorModel} from "../../../../core/donate/models/donor.model";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'kt-donors',
@@ -22,6 +23,8 @@ export class DonorsComponent implements OnInit, OnChanges {
   public coolModalOption: SweetAlertOptions;
 
   @ViewChild('failModal', {static: false}) private failModal: SwalComponent;
+
+  @ViewChild('listPaginator', {static: false}) public  listPaginator: MatPaginator;
   public failModalOption: SweetAlertOptions;
 
   public formGroup: FormGroup;
@@ -91,7 +94,7 @@ export class DonorsComponent implements OnInit, OnChanges {
   public deleteReceptor(receptorId: number) {
     this.failModal.fire().then((result) => {
       if (result.value) {
-        const answer = this.removeFormGroup.controls.answer.value?true:false;
+        const answer = !!this.removeFormGroup.controls.answer.value;
         this.donorService.delete(
           receptorId, answer, this.removeFormGroup.controls.comment.value).subscribe(
           (response) => {

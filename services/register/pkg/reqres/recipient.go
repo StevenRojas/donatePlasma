@@ -57,7 +57,9 @@ type PublicRecipientResquest struct {
 
 // DeleteRecipientResquest delete recipient request
 type DeleteRecipientResquest struct {
-	ID int64 `json:"id,omitempty"`
+	ID      int64  `json:"id,omitempty"`
+	Answer  bool   `json:"answer"`
+	Comment string `json:"comment"`
 }
 
 // ActivateRecipientResquest activate recipient request
@@ -161,6 +163,8 @@ func DecodeDeleteRecipientRequest(ctx context.Context, r *http.Request) (interfa
 		return nil, errors.New("Invalid access")
 	}
 	var req DeleteRecipientResquest
+	defer r.Body.Close()
+	err := json.NewDecoder(r.Body).Decode(&req)
 	vars := mux.Vars(r)
 	id, err := strconv.ParseInt(vars["id"], 10, 32)
 	if err != nil {
