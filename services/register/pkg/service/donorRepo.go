@@ -9,11 +9,11 @@ import (
 // CreateDonor creates a new donor
 func (repo *repository) CreateDonor(ctx context.Context, donor Donor) (int64, error) {
 	sql := `
-	INSERT INTO donor (id, blood_type_id, name, cell, email, city_id, verified, public)
-	VALUES (null, ?, ?, ?, ?, ?, 1, ?);`
+	INSERT INTO donor (id, blood_type_id, name, cell, email, city_id, verified, public, quantity_donations)
+	VALUES (null, ?, ?, ?, ?, ?, 1, ?, ?);`
 	stmt, err := repo.db.Prepare(sql)
 	res, err := stmt.ExecContext(ctx, strconv.Itoa(donor.BloodTypeID), donor.Name, donor.Cell, donor.Email,
-		donor.CityID, donor.Public)
+		donor.CityID, donor.Public, donor.Donations)
 	if err != nil {
 		return 0, err
 	}
