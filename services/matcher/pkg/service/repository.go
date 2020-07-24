@@ -122,7 +122,8 @@ func (repo *repository) CanDonateTo(ctx context.Context, bloodTypeID int64) ([]C
 
 // GetDonorList returns public donors compatible with a blood type
 func (repo *repository) GetDonorList(ctx context.Context, bloodTypeID int64) ([]Donor, error) {
-	sql := `SELECT * FROM donor WHERE blood_type_id = ` + strconv.FormatInt(bloodTypeID, 10) + `
+	sql := `SELECT SELECT id, blood_type_id, name, cell, email, city_id, verified, public, created_at, updated_at, deleted_at
+	  FROM donor WHERE blood_type_id = ` + strconv.FormatInt(bloodTypeID, 10) + `
 		AND public = 1 AND verified = 1 AND deleted_at IS NULL ORDER BY updated_at DESC`
 	rows, err := repo.db.QueryContext(ctx, sql)
 	if err != nil {
