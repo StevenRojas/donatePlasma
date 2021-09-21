@@ -61,7 +61,7 @@
         "ngx-perfect-scrollbar": "9.0.0",
         "ngx-permissions": "7.0.3",
         "ngx-sharebuttons": "^8.0.0",
-        "object-path": "0.11.4",
+        "object-path": "0.11.8",
         "popper.js": "^1.16.1",
         "rxjs": "6.5.5",
         "socicon": "3.0.5",
